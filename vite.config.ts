@@ -11,6 +11,16 @@ export default defineConfig(({ mode }) => {
       port: 3000,
       host: '0.0.0.0'
     },
+build: {
+  rollupOptions: {
+    output: {
+      manualChunks: {
+        react: ['react', 'react-dom'],
+        icons: ['lucide-react']
+      }
+    }
+  }
+}
 
     plugins: [
       react(),
@@ -52,6 +62,7 @@ export default defineConfig(({ mode }) => {
         '@': path.resolve(__dirname, '.')
       }
     }
+    
   }
 })
 

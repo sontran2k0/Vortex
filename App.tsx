@@ -7,7 +7,11 @@ import HomeView from './pages/HomeView';
 import LibraryView from './pages/LibraryView';
 import AddWordView from './pages/AddWordView';
 import AnalyticsView from './pages/AnalyticsView';
-import ProfileView from './pages/ProfileView';
+
+import { lazy, Suspense } from 'react'
+
+const ProfileView = lazy(() => import('./pages/ProfileView'))
+
 import FlashcardView from './pages/FlashcardView';
 import ReviewSession from './pages/ReviewSession';
 import BlackHoleMission from './pages/BlackHoleMission';
@@ -55,6 +59,9 @@ const App: React.FC = () => {
   const [viewingStatsDetail, setViewingStatsDetail] = useState<'all' | 'mastered' | null>(null);
 
   const getReviewQueue = useCallback(() => words.filter(w => w.nextReviewAt <= Date.now()), [words]);
+<Suspense fallback={<div>Loading...</div>}>
+  <ProfileView />
+</Suspense>
 
   useEffect(() => {
     initDataService().then(() => {
