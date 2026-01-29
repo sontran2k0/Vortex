@@ -4,6 +4,7 @@ import react from '@vitejs/plugin-react'
 import { VitePWA } from 'vite-plugin-pwa'
 
 export default defineConfig(({ mode }) => {
+  
   const env = loadEnv(mode, '.', '')
 
   return {
@@ -11,6 +12,7 @@ export default defineConfig(({ mode }) => {
       port: 3000,
       host: '0.0.0.0'
     },
+    
 build: {
   rollupOptions: {
     output: {
@@ -77,4 +79,8 @@ workbox: {
     
   }
 })
+
+function tailwind(): import("vite").PluginOption {
+  throw new Error('Function not implemented.')
+}
 

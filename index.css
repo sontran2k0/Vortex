@@ -1,0 +1,11 @@
+
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* optional: custom global style */
+html, body {
+  margin: 0;
+  padding: 0;
+}
