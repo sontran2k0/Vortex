@@ -274,10 +274,63 @@ const AddWordView: React.FC<AddWordViewProps> = ({ onAdd, collections, onCreateC
         <form onSubmit={handleSubmit} className="bg-white dark:bg-slate-900 p-8 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-sm space-y-6 max-w-2xl mx-auto">
            <div className="space-y-2">
             <label className="text-sm font-bold text-slate-700 dark:text-slate-300">Word or Phrase</label>
-            <div className="flex space-x-2">
-              <input required autoFocus type="text" value={term} onChange={(e) => setTerm(e.target.value)} className="flex-1 px-4 py-3 bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl focus:ring-2 focus:ring-indigo-500 transition-all text-lg font-medium" placeholder="e.g. Ephemeral" />
-              <button type="button" onClick={() => playSound(term)} disabled={!term} className="p-3 bg-slate-100 dark:bg-slate-800 text-slate-400 hover:text-indigo-600 rounded-xl transition-colors border border-slate-200 dark:border-slate-700 disabled:opacity-30" title="Speak word"><Volume2 className="w-6 h-6" /></button>
-              <button type="button" onClick={handleAiHelp} disabled={!term || isAiLoading} className="flex items-center px-4 py-3 bg-indigo-50 dark:bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 rounded-xl hover:bg-indigo-100 dark:hover:bg-indigo-500/20 disabled:opacity-50 transition-colors font-semibold">{isAiLoading ? <Loader2 className="w-5 h-5 animate-spin" /> : <Sparkles className="w-5 h-5" />}</button>
+            <div className="flex flex-col sm:flex-row gap-2 sm:gap-3">
+
+<input
+  required
+  autoFocus
+  type="text"
+  value={term}
+  onChange={(e) => setTerm(e.target.value)}
+  className="
+    flex-1
+    px-3 py-2 sm:px-4 sm:py-3
+    text-base sm:text-lg
+    bg-slate-100 dark:bg-slate-800
+    border border-slate-200 dark:border-slate-700
+    rounded-xl
+    focus:ring-2 focus:ring-indigo-500
+    transition-all
+    font-medium
+  "
+  placeholder="e.g. Ephemeral"
+/>
+<button
+  type="button"
+  onClick={() => playSound(term)}
+  disabled={!term}
+  className="
+    p-2 sm:p-3
+    bg-slate-100 dark:bg-slate-800
+    text-slate-400 hover:text-indigo-600
+    rounded-xl
+    border border-slate-200 dark:border-slate-700
+    disabled:opacity-30
+  "
+>
+  <Volume2 className="w-5 h-5 sm:w-6 sm:h-6" />
+</button>
+<button
+  type="button"
+  onClick={handleAiHelp}
+  disabled={!term || isAiLoading}
+  className="
+    flex items-center justify-center
+    px-3 py-2 sm:px-4 sm:py-3
+    text-sm sm:text-base
+    bg-indigo-50 dark:bg-indigo-500/10
+    text-indigo-600 dark:text-indigo-400
+    rounded-xl
+    hover:bg-indigo-100 dark:hover:bg-indigo-500/20
+    disabled:opacity-50
+    font-semibold
+  "
+>
+  {isAiLoading
+    ? <Loader2 className="w-4 h-4 sm:w-5 sm:h-5 animate-spin" />
+    : <Sparkles className="w-4 h-4 sm:w-5 sm:h-5" />
+  }
+</button>
             </div>
           </div>
           <div className="space-y-2">
@@ -316,12 +369,47 @@ const AddWordView: React.FC<AddWordViewProps> = ({ onAdd, collections, onCreateC
           
           <div className="space-y-2">
             <label className="text-sm font-bold text-slate-700 dark:text-slate-300 flex items-center gap-2"><ImageIcon className="w-4 h-4" /> Flashcard Image (Optional)</label>
-            <div className="flex gap-2 mb-2">
-              <input type="text" value={imageUrlInput} onChange={handleImageUrlInputChange} placeholder="Paste image URL..." className="flex-1 px-4 py-3 bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl focus:ring-2 focus:ring-indigo-500 transition-all text-sm" />
-              <label className="p-3 bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl text-slate-500 hover:text-indigo-600 shadow-sm cursor-pointer transition-colors flex items-center justify-center" title="Upload Image">
-                <Upload className="w-6 h-6" /><input ref={fileInputRef} type="file" accept="image/*" onChange={handleImageUpload} className="hidden" />
-              </label>
-            </div>
+           <div className="flex gap-2 mb-2">
+  <input
+    type="text"
+    value={imageUrlInput}
+    onChange={handleImageUrlInputChange}
+    placeholder="Image URL"
+    className="
+      flex-1 px-3 py-2
+      text-sm
+      bg-slate-100 dark:bg-slate-800
+      border border-slate-200 dark:border-slate-700
+      rounded-lg
+      focus:ring-2 focus:ring-indigo-500
+      transition-all
+    "
+  />
+
+  <label
+    className="
+      px-3 py-2
+      bg-slate-100 dark:bg-slate-800
+      border border-slate-200 dark:border-slate-700
+      rounded-lg
+      text-slate-500 hover:text-indigo-600
+      cursor-pointer
+      flex items-center justify-center
+      shrink-0
+    "
+    title="Upload"
+  >
+    <Upload className="w-5 h-5" />
+    <input
+      ref={fileInputRef}
+      type="file"
+      accept="image/*"
+      onChange={handleImageUpload}
+      className="hidden"
+    />
+  </label>
+</div>
+
             {(imagePreviewUrl || uploadedImageFile) && (
               <div className="relative w-full h-40 bg-slate-100 dark:bg-slate-800 rounded-xl flex items-center justify-center overflow-hidden border border-slate-200 dark:border-slate-700">
                 <img src={imagePreviewUrl || (uploadedImageFile ? URL.createObjectURL(uploadedImageFile) : '')} alt="Preview" className="object-contain max-h-full w-full" />
