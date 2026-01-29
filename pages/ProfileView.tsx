@@ -119,7 +119,28 @@ const ProfileView: React.FC<ProfileViewProps> = (props) => {
               <div className={`absolute -bottom-1 -right-1 w-10 h-10 rounded-full bg-gradient-to-r ${streakRank.color} border-4 border-slate-900 shadow-xl flex items-center justify-center text-xl z-20`}>{streakRank.gem}</div>
               <button onClick={() => setIsEditingAvatar(true)} className="absolute inset-0 rounded-full flex items-center justify-center bg-black/40 text-white opacity-0 group-hover:opacity-100 transition-opacity z-30"><ImageIcon className="w-8 h-8" /></button>
             </div>
-            {isEditingProfile ? (<div className="flex flex-col items-center gap-2 mb-4 w-full max-w-sm px-4"><input type="text" value={tempUserName} onChange={(e) => setTempUserName(e.target.value)} className="text-3xl font-bold text-center bg-slate-800 text-white border border-slate-700 rounded-xl px-4 py-2 w-full focus:outline-none focus:ring-2 focus:ring-indigo-500"/><div className="flex gap-2 mt-2"><button onClick={handleSaveUserName} className="flex items-center px-4 py-2 bg-indigo-600 text-white rounded-xl font-bold"><Save className="w-4 h-4 mr-2" /> Save</button><button onClick={() => setIsEditingProfile(false)} className="px-4 py-2 bg-slate-700 rounded-xl font-bold">Cancel</button></div></div>) : (<h2 className="text-3xl font-bold tracking-tight flex items-center justify-center gap-2">{stats.userName}<button onClick={() => setIsEditingProfile(true)} className="p-1 text-slate-400 hover:text-indigo-500"><Edit className="w-5 h-5" /></button></h2>)}
+            {isEditingProfile ? (<div className="flex flex-col items-center gap-2 mb-4 w-full max-w-sm px-4"><input type="text" value={tempUserName} onChange={(e) => setTempUserName(e.target.value)} className="text-3xl font-bold text-center bg-slate-800 text-white border border-slate-700 rounded-xl px-4 py-2 w-full focus:outline-none focus:ring-2 focus:ring-indigo-500"/><div className="flex gap-2 mt-2"><button onClick={handleSaveUserName} className="flex items-center px-4 py-2 bg-indigo-600 text-white rounded-xl font-bold"><Save className="w-4 h-4 mr-2" /> Save</button><button onClick={() => setIsEditingProfile(false)} className="px-4 py-2 bg-slate-700 rounded-xl font-bold">Cancel</button></div></div>) : (<h2 className="
+  text-xl 
+  sm:text-3xl 
+  font-bold 
+  tracking-tight 
+  flex 
+  flex-wrap 
+  items-center 
+  justify-center 
+  gap-2 
+  text-center
+">
+  {stats.userName}
+
+  <button 
+    onClick={() => setIsEditingProfile(true)} 
+    className="p-1 text-slate-400 hover:text-indigo-500"
+  >
+    <Edit className="w-5 h-5" />
+  </button>
+</h2>
+)}
             <p className={`text-sm font-bold bg-gradient-to-r ${streakRank.color} bg-clip-text text-transparent uppercase tracking-widest mt-2`}>{streakRank.title}</p>
             <div className="w-full border-t border-slate-800 mt-10 pt-8 space-y-6">
               <div className="grid grid-cols-3 w-full p-4 rounded-2xl border-2 border-dashed border-slate-700">
