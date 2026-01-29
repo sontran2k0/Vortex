@@ -5,14 +5,15 @@ import { initializeApp } from "firebase/app";
 // https://firebase.google.com/docs/web/setup#available-libraries
 
 // Your web app's Firebase configuration
-const firebaseConfig = {
+export const firebaseConfig = {
   apiKey: "AIzaSyB5LOSMXPNUw-ItmiboJUiY0h9SNRMxe4c",
   authDomain: "vortex-cards-7b35e.firebaseapp.com",
   projectId: "vortex-cards-7b35e",
-  storageBucket: "vortex-cards-7b35e.firebasestorage.app",
+  storageBucket: "vortex-cards-7b35e.appspot.com",
   messagingSenderId: "707335613971",
   appId: "1:707335613971:web:2bd74491173dc0eff2d9e6"
 };
+
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
