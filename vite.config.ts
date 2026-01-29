@@ -20,7 +20,19 @@ build: {
       }
     }
   }
-}
+},
+workbox: {
+ runtimeCaching: [
+  {
+   urlPattern: /api/,
+   handler: 'NetworkFirst',
+   options: {
+     cacheName: 'api-cache',
+     expiration: { maxEntries: 50 }
+   }
+  }
+ ]
+},
 
     plugins: [
       react(),
@@ -30,7 +42,7 @@ build: {
         includeAssets: ['favicon.ico'],
         manifest: {
           name: 'Vortex Cards',
-          short_name: 'Vortex',
+          short_name: 'Vortex Cards',
           description: 'Vortex Cards',
           theme_color: '#0f124088',
           background_color: '#09082eac',
@@ -38,12 +50,12 @@ build: {
           start_url: '/',
           icons: [
             {
-              src: '/logo.png',
+              src: '/logo-192.png',
               sizes: '192x192',
               type: 'image/png'
             },
             {
-              src: '/logo.png',
+              src: '/logo-512.png',
               sizes: '512x512',
               type: 'image/png'
             }

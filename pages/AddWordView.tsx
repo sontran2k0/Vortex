@@ -134,18 +134,44 @@ const AddWordView: React.FC<AddWordViewProps> = ({ onAdd, collections, onCreateC
   };
 
   const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (file) {
-      setUploadedImageFile(file);
-      const reader = new FileReader();
-      reader.onloadend = () => setImagePreviewUrl(reader.result as string);
-      reader.readAsDataURL(file);
+  const file = e.target.files?.[0];
+  if (!file) return;
+
+  const img = new Image();
+  img.src = URL.createObjectURL(file);
+
+  img.onload = () => {
+    const maxSize = 512; // kích thước vuông chuẩn mobile
+    const canvas = document.createElement('canvas');
+    canvas.width = maxSize;
+    canvas.height = maxSize;
+
+    const ctx = canvas.getContext('2d')!;
+    ctx.drawImage(img, 0, 0, maxSize, maxSize);
+
+    canvas.toBlob((blob) => {
+      if (!blob) return;
+
+      // tạo file mới nhẹ hơn
+      const optimizedFile = new File([blob], file.name.replace(/\.\w+$/, '.webp'), {
+        type: 'image/webp'
+      });
+
+      setUploadedImageFile(optimizedFile);
+
+      const previewUrl = URL.createObjectURL(blob);
+      setImagePreviewUrl(previewUrl);
+
       setImageUrlInput('');
-    } else {
-      setUploadedImageFile(null);
-      setImagePreviewUrl(null);
-    }
+    }, 'image/webp', 0.7);
   };
+};
+useEffect(() => {
+ return () => {
+  if(imagePreviewUrl) URL.revokeObjectURL(imagePreviewUrl);
+ };
+}, [imagePreviewUrl]);
+
 
   const handleImageUrlInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const url = e.target.value;
